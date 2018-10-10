@@ -8,13 +8,13 @@ class Todo extends Component {
     super(props);
 
     this.state = {
-      completed: props.completed,
+      completed: props.todo.completed,
       hovering: false
     }
 
     this.clickHandler = this.clickHandler.bind(this);
     this.hoverHandler = this.hoverHandler.bind(this);
-    this.onDeleteHandler = this.onDeleteHandler.bind(this);
+    this.deleteTodo = this.deleteTodo.bind(this);
   }
 
   hoverHandler(event) {
@@ -29,24 +29,25 @@ class Todo extends Component {
     })
   }
 
-  onDeleteHandler(event) {
-    return this.props.deleteTodo(this.state.id);
+  deleteTodo(event, id) {
+    this.props.deleteTodo(this.state.id);
   }
 
   render() {
     return (
       <div 
-        className={this.state.completed ? 'Completed flex row todo' : 'flex row todo'}
-        onClick={this.clickHandler}
+        //className={this.state.completed ? 'Completed flex row todo align-center justify-center' : 'flex row todo align-center justify-center'}
+        className="flex row align-center"
         onMouseEnter={this.hoverHandler}
         onMouseLeave={this.hoverHandler}  
       >
-        <p className='todo-text'>
-          {this.props.text}
-        </p>
+        <p className={this.state.completed ? 'Completed' : ''}>{this.props.todo.text}</p>
         {
           this.state.hovering &&
-          <button onClick={() => {this.props.deleteTodo(this.props.id)}}>delete</button>
+          <div className="flex row justify-end align-center">
+            <i className="fas fa-trash-alt" onClick={() => this.props.deleteTodo(this.props.todo.id)}/>
+            <i className={this.state.completed ? "fas fa-check completed-icon" : "fas fa-check"} onClick={this.clickHandler}/>
+          </div>
         }
       </div>
     );

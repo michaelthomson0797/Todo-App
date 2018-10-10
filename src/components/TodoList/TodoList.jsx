@@ -7,8 +7,8 @@ class TodoList extends Component {
   render() {
     return (
       <div>
-        {this.props.todos.map((todo, id) =>
-          <Todo deleteTodo={this.props.deleteTodo} id={id} text={todo.text} completed={todo.completed}/>
+        {this.props.todos.map((todo) =>
+          <Todo deleteTodo={this.props.deleteTodo} key={todo.id} todo={todo}/>
         )}
       </div>
     )

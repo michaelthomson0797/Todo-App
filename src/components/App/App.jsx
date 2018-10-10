@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import TodoList from '../TodoList/TodoList';
 import AddTodo from '../AddTodo/AddTodo';
 
+window.id = 0;
 class App extends Component {
 
   constructor(props) {
@@ -10,21 +11,17 @@ class App extends Component {
     this.state = { todos: [] };
 
     this.addTodo = this.addTodo.bind(this);
-    this.deleteToDo = this.deleteToDo.bind(this);
+    this.deleteTodo = this.deleteTodo.bind(this);
   }
 
-  addTodo(todo) {
-    this.setState({ todos: this.state.todos.concat(todo)});
+  addTodo(text) {
+    this.setState({ todos: [...this.state.todos, {id: window.id++, text: text, completed: false}]});
   }
 
-  deleteToDo(id) {
-    this.setState({
-      todos: this.state.todos.filter((todo, index) => {
-        return id !== index;
-      })
-    })
-
-    console.log(this.state)
+  deleteTodo(id) {
+    this.setState(prevState => ({
+      todos: prevState.todos.filter((todo) =>  id !== todo.id)
+    }))
   }
 
   render() {
@@ -32,7 +29,7 @@ class App extends Component {
       <div className="container">
         <h1>To-Do List</h1>
         <AddTodo addTodo={this.addTodo}/>
-        <TodoList deleteTodo={this.deleteToDo} todos={this.state.todos}/> 
+        <TodoList deleteTodo={this.deleteTodo} todos={this.state.todos}/> 
       </div>
     );
   }

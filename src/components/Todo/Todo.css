@@ -1,5 +1,9 @@
-.Completed p {
+.Completed {
   text-decoration: line-through;
+}
+
+.completed-icon {
+  color: green;
 }
 
 .todo {

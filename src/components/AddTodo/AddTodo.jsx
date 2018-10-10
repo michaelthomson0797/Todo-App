@@ -17,7 +17,7 @@ class AddTodo extends Component {
   onSubmitHandler(event) {
     event.preventDefault();
     this.setState({value: ""})
-    this.props.addTodo({ id: -1, text: this.state.value, completed: false })
+    this.props.addTodo(this.state.value)
   }
 
   render() {
