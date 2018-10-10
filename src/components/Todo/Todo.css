@@ -1,0 +1,13 @@
+.Completed p {
+  text-decoration: line-through;
+}
+
+.todo {
+  width: 25%;
+  margin: 5px;
+  padding: 10px;
+}
+
+.todo:hover {
+  background: #dddddd;
+}
